@@ -1,4 +1,4 @@
-FROM node:20-alpine
+FROM node:22-alpine
 
 WORKDIR /app
 
@@ -16,4 +16,5 @@ COPY . /app
 
 EXPOSE 3003
 
-ENTRYPOINT [ "yarn", "start:dev" ]
+# consumivel no dockercompose
+# ENTRYPOINT [ "yarn", "start:dev" ]
