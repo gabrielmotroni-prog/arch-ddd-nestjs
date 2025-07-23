@@ -6,7 +6,7 @@ services:
       dockerfile: Dockerfile
     container_name: api
     ## reload automatically on code changes 
-    entrypoint: sh -c "yarn install --frozen-lockfile && yarn start:dev" 
+    entrypoint: sh -c "yarn install --frozen-lockfile && yarn start:swc" 
     depends_on:
       - mongodb
     networks:
@@ -15,7 +15,7 @@ services:
       - ${PORT}:${PORT}
     volumes:
       - .:/app
-      #- /app/node_modules
+      - /app/node_modules
 
   mongodb: 
     image: mongo:latest
