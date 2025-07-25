@@ -11,12 +11,11 @@ export class MongodbUserRepository implements UserRepositoryInterface {
   ) {}
 
   async create(data: User): Promise<UserModel> {
-    const user = await this.userCollection.create(data);
-    return user.save();
+    return await this.userCollection.create(data);
   }
 
   find(): Promise<UserModel[]> {
-    return this.userCollection.find({}, { __v: false }).exec();
+    return this.userCollection.find({}, { __v: false });
   }
 
   async findById(id: string): Promise<UserModel | null> {
@@ -25,12 +24,13 @@ export class MongodbUserRepository implements UserRepositoryInterface {
   }
 
   async update(id: string, dataUpdate: User): Promise<UserModel | null> {
-    const user = await this.userCollection.findOneAndUpdate({
-      _id: { $eq: id },
-      $set: dataUpdate,
-    });
+    const user = await this.userCollection.findOneAndUpdate(
+      { _id: { $eq: id } },
+      { $set: dataUpdate },
+    );
     return user;
   }
+
   async remove(id: string): Promise<void> {
     await this.userCollection.deleteOne({ _id: { $eq: id } }).exec();
   }
