@@ -1,4 +1,4 @@
-import { Prop, Schema } from '@nestjs/mongoose';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { randomUUID } from 'node:crypto';
 
 @Schema({ collection: 'users', timestamps: true })
@@ -24,3 +24,5 @@ export class UserModel {
   @Prop({ type: Date })
   updatedAt: string;
 }
+
+export const UserSchema = SchemaFactory.createForClass(UserModel);

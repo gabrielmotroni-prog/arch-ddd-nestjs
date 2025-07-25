@@ -1,7 +1,7 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { AddUserUseCase } from '../../usecases/user/add-user-usecase';
 
-@Controller()
+@Controller('users')
 export class UserController {
   constructor(private readonly addUserUseCase: AddUserUseCase) {}
 

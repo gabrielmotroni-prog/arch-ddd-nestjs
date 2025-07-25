@@ -1,4 +1,4 @@
-#version: '3.8'
+version: '3.8'
 services: 
   api:
     build: 
@@ -6,7 +6,7 @@ services:
       dockerfile: Dockerfile
     container_name: api
     ## reload automatically on code changes 
-    entrypoint: sh -c "yarn install --frozen-lockfile && yarn start:swc" 
+    entrypoint: sh -c 'yarn install --frozen-lockfile && yarn start:swc' 
     depends_on:
       - mongodb
     networks:

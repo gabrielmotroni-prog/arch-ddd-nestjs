@@ -1,16 +1,16 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule, ConfigService } from '@nestjs/config';
+import { MongodbModule } from './mongodb/mongodb.module';
 import { MongooseModule } from '@nestjs/mongoose';
+import { UserModel, UserSchema } from './mongodb/models/user/user.model';
+import { MongodbUserRepository } from './mongodb/repositories/user/mongodb-user-repository';
 
 @Module({
   imports: [
-    MongooseModule.forRootAsync({
-      inject: [ConfigService],
-      imports: [ConfigModule],
-      useFactory: (configService: ConfigService) => ({
-        uri: configService.get<string>('MONGODB_URI'),
-      }),
-    }),
+    MongodbModule,
+    MongooseModule.forFeature([{ name: UserModel.name, schema: UserSchema }]),
   ],
+
+  exports: [MongodbUserRepository, MongodbModule],
+  providers: [MongodbUserRepository],
 })
 export class DatabaseModule {}
